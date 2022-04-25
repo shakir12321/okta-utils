@@ -19,9 +19,19 @@ public class User {
     private String phone;
     private String website;
 
-    @Embedded
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    //@Embedded
+    @OneToOne(cascade = CascadeType.ALL)
     private Address address;
-    @Embedded
+    //@Embedded
+    @OneToOne(cascade = CascadeType.ALL)
     private Company company;
 
     public User() {}

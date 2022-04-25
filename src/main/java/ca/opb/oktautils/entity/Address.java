@@ -1,23 +1,34 @@
 package ca.opb.oktautils.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
 
-import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
+import javax.persistence.*;
 
 @Data
+@Entity
 @AllArgsConstructor
-@Embeddable
+//@Embeddable
 public class Address {
-
+    @Id
+    @GeneratedValue( strategy = GenerationType.AUTO )
+    private Long id;
     private String street;
     private String suite;
     private String city;
     private String zipcode;
 
-    @Embedded
-    private Geo geo;
+  //  @Embedded
+
+    public Geo getGeo() {
+        return geo;
+    }
+
+    public void setGeo(Geo geo) {
+        this.geo = geo;
+    }
+
+    @OneToOne(cascade = CascadeType.ALL)
+  private Geo geo;
 
     public Address() {}
 }
